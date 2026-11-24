@@ -14,7 +14,7 @@ const httpRequestsTotal = new promClient.Counter({
 
 app.use((req, res, next) => {
     res.on('finish', () => {
-        httpRequests.Total.inc({
+        httpRequestsTotal.inc({
             method: req.method,
             route: req.path,
             status_code: res.statusCode,
@@ -31,4 +31,4 @@ app.get('/metrics', async (req, res) => {
 app.get('/', (req, res) => res.send('DevOps Final Project'));
 app.get('/health', (req, res) => res.json({ status: 'ok'}));
 
-app.listen(3000, () => console.log('Server started'))
+module.exports = app;
